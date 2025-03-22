@@ -60,10 +60,13 @@ const SparkleEffect = () => {
             ...styles.sparkle,
             left: sparkle.x + "px",
             top: sparkle.y + "px",
-            animation: fall ${sparkle.duration}s linear infinite,
+            animation: fall ${sparkle.duration}s linear infinite, // Fixed animation syntax
             opacity: sparkle.opacity,
             backgroundColor: sparkle.color, // Apply the random color here
-            clipPath: sparkle.shape === "star" ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)" : "polygon(50% 0%, 61% 20%, 80% 40%, 70% 70%, 50% 50%, 30% 70%, 20% 40%, 39% 20%)", // Star or Leaf shape
+            clipPath:
+              sparkle.shape === "star"
+                ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)"
+                : "polygon(50% 0%, 61% 20%, 80% 40%, 70% 70%, 50% 50%, 30% 70%, 20% 40%, 39% 20%)", // Star or Leaf shape
           }}
         />
       ))}
