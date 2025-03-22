@@ -39,30 +39,7 @@ const options12 = options;
 const options14 = options1;
 
 export default function DefaultInputs() {
-  const [formData, setFormData] = useState<{
-    question1: string;
-    question2: string;
-    question3: string;
-    question4: string;
-    question5: string;
-    question6: string;
-    question7: string;
-    question8: string;
-    question9: string;
-    question10: string;
-    question11: string;
-    question12: string;
-    question13: string;
-    question14: string;
-    rating2: string;
-    feedback: string;
-    message: string;
-    missing: string;
-    favourite: string;
-    secret: string;
-    describe: string;
-    youwant: string;
-  }>({
+  const [formData, setFormData] = useState({
     question1: "",
     question2: "",
     question3: "",
@@ -87,7 +64,7 @@ export default function DefaultInputs() {
     youwant: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,17 +101,6 @@ export default function DefaultInputs() {
     // Show success message
     setSuccessMessage("Form submitted successfully! ✅");
   };
-
-  // Ensure useEffect is called correctly if using other dependencies
-  useEffect(() => {
-    // Add logic here if you use sparkleColors, sparkleShapes, or similar variables
-    // Ensure to list all dependencies that are used inside the useEffect hook
-    // Example:
-    // const sparkleColors = ...
-    // const sparkleShapes = ...
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [/* sparkleColors, sparkleShapes */]);
 
   return (
     <ComponentCard title="Please give the answer honestly 😊">
@@ -342,7 +308,7 @@ export default function DefaultInputs() {
           />
         </div>
 
-        {/* Other fields */}
+        {/* Missing field */}
         <div>
           <Label>If I miss anything please let me know..👩🏻‍💼</Label>
           <Input
@@ -369,7 +335,7 @@ export default function DefaultInputs() {
         </div>
 
         <div>
-          <Label>One secret line you want to tell me💗🎀🌸</Label>
+          <Label>One secret line you want to tell me💗🎀🌸</Label>
           <Input
             type="text"
             name="secret"
@@ -381,7 +347,7 @@ export default function DefaultInputs() {
         </div>
 
         <div>
-          <Label>Describe our bond in one line🧸ྀི</Label>
+          <Label>Describe our bond in one line🧸ྀི</Label>
           <Input
             type="text"
             name="describe"
