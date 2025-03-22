@@ -10,16 +10,6 @@ import {
 } from "../ui/table";
 import Badge from "../ui/badge/Badge";
 
-interface Sparkle {
-  id: number;
-  x: number;
-  y: number;
-  opacity: number;
-  color: string;
-  shape: "star" | "leaf"; // Restrict the shape to 'star' or 'leaf'
-  duration: number;
-}
-
 interface Order {
   id: number;
   projectName: string;
@@ -31,7 +21,7 @@ interface Order {
 }
 
 const SparkleEffect = () => {
-  const [sparkles, setSparkles] = useState<Sparkle[]>([]); // Use the specific Sparkle type
+  const [sparkles, setSparkles] = useState<any[]>([]);
 
   const sparkleColors = ["#FF1493", "#FF6347", "#FFD700"]; // Pink, Red, Gold
   const sparkleShapes = ["star", "leaf"]; // Star and Leaf shapes
@@ -70,7 +60,7 @@ const SparkleEffect = () => {
             ...styles.sparkle,
             left: sparkle.x + "px",
             top: sparkle.y + "px",
-            animation: fall ${sparkle.duration}s linear infinite,
+            animation: `fall ${sparkle.duration}s linear infinite`,
             opacity: sparkle.opacity,
             backgroundColor: sparkle.color, // Apply the random color here
             clipPath: sparkle.shape === "star" ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)" : "polygon(50% 0%, 61% 20%, 80% 40%, 70% 70%, 50% 50%, 30% 70%, 20% 40%, 39% 20%)", // Star or Leaf shape
