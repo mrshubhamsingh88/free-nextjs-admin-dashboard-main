@@ -10,6 +10,16 @@ import {
 } from "../ui/table";
 import Badge from "../ui/badge/Badge";
 
+interface Sparkle {
+  id: number;
+  x: number;
+  y: number;
+  opacity: number;
+  color: string;
+  shape: "star" | "leaf"; // Restrict the shape to 'star' or 'leaf'
+  duration: number;
+}
+
 interface Order {
   id: number;
   projectName: string;
@@ -21,7 +31,7 @@ interface Order {
 }
 
 const SparkleEffect = () => {
-  const [sparkles, setSparkles] = useState<any[]>([]);
+  const [sparkles, setSparkles] = useState<Sparkle[]>([]); // Use the specific Sparkle type
 
   const sparkleColors = ["#FF1493", "#FF6347", "#FFD700"]; // Pink, Red, Gold
   const sparkleShapes = ["star", "leaf"]; // Star and Leaf shapes
@@ -60,7 +70,7 @@ const SparkleEffect = () => {
             ...styles.sparkle,
             left: sparkle.x + "px",
             top: sparkle.y + "px",
-            animation: `fall ${sparkle.duration}s linear infinite`,
+            animation: fall ${sparkle.duration}s linear infinite,
             opacity: sparkle.opacity,
             backgroundColor: sparkle.color, // Apply the random color here
             clipPath: sparkle.shape === "star" ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)" : "polygon(50% 0%, 61% 20%, 80% 40%, 70% 70%, 50% 50%, 30% 70%, 20% 40%, 39% 20%)", // Star or Leaf shape
@@ -300,9 +310,9 @@ export default function BasicTableOne() {
       {/* Congratulations Message */}
       {showCongrats && (
         <div className="fixed top-1/4 left-1/2 transform -translate-x-1/2 p-6 bg-gradient-to-r from-pink-100 to-red-100 text-gray-800 text-2xl font-semibold rounded-lg shadow-lg animate-fadeIn sparkle text-center" style={{ fontFamily: 'Poppins, sans-serif' }}>
-          <span role="img" aria-label="love" className="text-4xl">❤️</span>
-          Hey, miss cute gorgeous girl in the world 💖✨.. Here is the list of permissions given to the super admin 👑🔐
-          <span role="img" aria-label="love" className="text-4xl">❤️</span>
+          <span role="img" aria-label="love" className="text-4xl">❤</span>
+          Hey, miss cute gorgeous girl in the world 💖✨.. Here is the list of permissions given to the super admin 👑🔐
+          <span role="img" aria-label="love" className="text-4xl">❤</span>
           <span role="img" aria-label="sparkle" className="text-4xl">✨</span>
         </div>
       )}
