@@ -1,6 +1,6 @@
 "use client"; // Add this line to mark the component as a client component
 
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
 import React, { useEffect } from "react";
 import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
@@ -8,10 +8,10 @@ import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
 import StatisticsChart from "@/components/ecommerce/StatisticsChart";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
 import { useRouter } from "next/navigation"; // Import useRouter for redirection
-const metadata: Metadata = {
-  title: "Best Friends Forever: Panda & Princess Edition 🌸🐼👑",
-  description:
-    "You’re the princess of my world, and together, we create a story as magical as a fairy tale. With you by my side, every moment feels like a dream come true. 👑✨",
+export const metadata: Metadata = {
+  title:
+    "Best Friends Forever: Panda & Princess Edition 🌸🐼👑",
+  description: "You’re the princess of my world, and together, we create a story as magical as a fairy tale. With you by my side, every moment feels like a dream come true. 👑✨",
 };
 
 export default function Ecommerce() {

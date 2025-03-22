@@ -3,7 +3,6 @@
 import { ApexOptions } from "apexcharts";
 
 import dynamic from "next/dynamic";
-import { useState } from "react";
 
 // Dynamically import the ReactApexChart component
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
@@ -70,7 +69,7 @@ export default function MonthlyTarget() {
               Target 🐼🌸✨
             </h3>
             <p className="mt-1 font-normal text-gray-500 text-theme-sm dark:text-gray-400">
-              Target you've set for achieve 🐼 & trust and becomes a panda's important persona 🏅💖 | Keep up the amazing work and create the best memories, My Dear Cute Panda(Shreni)🐼💖! 💪
+              Target you&apos;ve set for achieve 🐼 & trust and becomes a panda&apos;s important persona 🏅💖 | Keep up the amazing work and create the best memories, My Dear Cute Panda(Shreni)🐼💖! 💪
             </p>
           </div>
           {/* <div className="relative inline-block">
@@ -114,7 +113,7 @@ export default function MonthlyTarget() {
           </span>
         </div>
         <p className="mx-auto mt-10 w-full max-w-[380px] text-center text-sm text-gray-500 sm:text-base">
-        You achieved great progress today 🌟💪, it's better than last month 🎉. Keep shining, My Cute Panda🐼💖! 🌸
+        You achieved great progress today 🌟💪, it&apos;s better than last month 🎉. Keep shining, My Cute Panda🐼💖! 🌸
         </p>
       </div>
 

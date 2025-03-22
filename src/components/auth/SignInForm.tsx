@@ -53,7 +53,7 @@ Ready to connect? Log in now to access the Panda Server and start your adventur
             </Label>
             <p className="text-sm text-gray-500 dark:text-gray-400">
             Hey, Beautiful Princess 👑✨
-Welcome to your server! 🌸 I hope you're doing wonderfully. 🌟 I wish you love and joy as you explore this special place. 💖
+Welcome to your server! 🌸 I hope you&apos;re doing wonderfully. 🌟 I wish you love and joy as you explore this special place. 💖
 
 This is the server of the cutest person in the world, Miss Super Admin Panda 🐼🌸. Please enter your login credentials 🔑 to visit your very own adorable server! 💻🎉
 

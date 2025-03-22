@@ -143,7 +143,7 @@ export default function DefaultInputs() {
 
         {/* Question 4 */}
         <div>
-          <Label>You really feel I'm your bachha.. 🧸</Label>
+          <Label>You really feel I&apos;m your bachha.. 🧸</Label>
           <Select
             options={options3}
             value={formData.question4}
@@ -215,7 +215,7 @@ export default function DefaultInputs() {
 
         {/* Question 10 */}
         <div>
-          <Label>Your real feel that's you're my favorite person 😍</Label>
+          <Label>Your real feel that&apos;s you&apos;re my favorite person 😍</Label>
           <Select
             options={options9}
             value={formData.question10}
@@ -323,7 +323,7 @@ export default function DefaultInputs() {
 
         {/* Missing field */}
         <div>
-          <Label>I'm your favourite person🙋Member</Label>
+          <Label>I&apos;m your favourite person🙋Member</Label>
           <Input
             type="text"
             name="favourite"

@@ -31,7 +31,7 @@ export default function AuthLayout({
                 </Link>
                 <p className="text-center text-gray-400 dark:text-white/60">
                 The Secret Code (Panda) of Super Admin 🐼🔐
-                Ahh, like a keystore file that's encrypted 🔒, and the password 🔑 is known only by you! Once lost, it can't be regenerated ❌, and without it, you can't publish the app 📱🚫.
+                Ahh, like a keystore file that&apos;s encrypted 🔒, and the password 🔑 is known only by you! Once lost, it can&apos;t be regenerated ❌, and without it, you can&apos;t publish the app 📱🚫.
                 </p>
                 <Image
                     width={231}
