@@ -4,7 +4,6 @@ import ComponentCard from "../../common/ComponentCard";
 import Label from "../Label";
 import Input from "../input/InputField";
 import Select from "../Select";
-import { ChevronDownIcon } from "../../../icons";
 
 // Define the options for each question
 const options = [
@@ -37,7 +36,6 @@ const options9 = options1;
 const options10 = options;
 const options11 = options1;
 const options12 = options;
-const options13 = options1;
 const options14 = options1;
 
 export default function DefaultInputs() {
