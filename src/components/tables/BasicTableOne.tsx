@@ -60,7 +60,7 @@ const SparkleEffect = () => {
             ...styles.sparkle,
             left: sparkle.x + "px",
             top: sparkle.y + "px",
-            animation: `fall ${sparkle.duration}s linear infinite`,
+            animation: fall ${sparkle.duration}s linear infinite,
             opacity: sparkle.opacity,
             backgroundColor: sparkle.color, // Apply the random color here
             clipPath: sparkle.shape === "star" ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)" : "polygon(50% 0%, 61% 20%, 80% 40%, 70% 70%, 50% 50%, 30% 70%, 20% 40%, 39% 20%)", // Star or Leaf shape
@@ -275,13 +275,6 @@ const tableData: Order[] = [
   }
 ];
 
-const getPercentageColor = (percentage: string) => {
-  const value = parseInt(percentage.replace("%", ""));
-  if (value >= 70) return "bg-green-500 text-white";
-  if (value >= 40) return "bg-yellow-500 text-white";
-  return "bg-red-500 text-white";
-};
-
 export default function BasicTableOne() {
   const [showCongrats, setShowCongrats] = useState(false);
 
@@ -316,6 +309,7 @@ export default function BasicTableOne() {
           <Table>
             <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
               <TableRow>
+                {/* Table Header Cells */}
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -371,10 +365,15 @@ export default function BasicTableOne() {
                     {order.projectName}
                   </TableCell>
                   <TableCell className="px-4 py-3">
+                    {/* Directly define percentage color */}
                     <span
-                      className={`inline-block px-2 py-1 rounded-full ${getPercentageColor(
-                        order.percentage
-                      )}`}
+                      className={`inline-block px-2 py-1 rounded-full ${
+                        parseInt(order.percentage.replace("%", "")) >= 70
+                          ? "bg-green-500 text-white"
+                          : parseInt(order.percentage.replace("%", "")) >= 40
+                          ? "bg-yellow-500 text-white"
+                          : "bg-red-500 text-white"
+                      }`}
                     >
                       {order.percentage}
                     </span>
@@ -395,8 +394,8 @@ export default function BasicTableOne() {
                         order.status === "Active"
                           ? "success"
                           : order.status === "Pending"
-                            ? "warning"
-                            : "error"
+                          ? "warning"
+                          : "error"
                       }
                     >
                       {order.status}
