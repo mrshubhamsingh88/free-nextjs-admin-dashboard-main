@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+  <!-- Transparent background -->
+  <rect width="200" height="100" fill="transparent"/>
+  <text x="70" y="60" font-size="30" font-family="Arial" fill="purple">🐼Server🌸🌼</text>
+</svg>
