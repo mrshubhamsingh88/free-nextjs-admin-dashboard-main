@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
+const isGithubPages = process.env.NODE_ENV === "production";
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  assetPrefix: isGithubPages ? "/free-nextjs-admin-dashboard-main/" : "",
+  images: {
+    unoptimized: true,
+  },
+  output: "export", // ✅ enables static export
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

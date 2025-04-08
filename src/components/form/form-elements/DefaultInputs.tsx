@@ -62,6 +62,8 @@ export default function DefaultInputs() {
     secret: "",
     describe: "",
     youwant: "",
+    superadminhabit :""
+    
   });
 
   const [successMessage, setSuccessMessage] = useState("");
@@ -81,11 +83,12 @@ export default function DefaultInputs() {
   const saveToJson = () => {
     // Check if all fields are filled
     for (const key in formData) {
-      if (formData[key] === "") {
+      if (formData[key as keyof typeof formData] === "") {
         alert("Please fill all fields!");
         return;
       }
     }
+    
 
     const json = JSON.stringify(formData, null, 2);
 

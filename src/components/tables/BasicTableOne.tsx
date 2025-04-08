@@ -21,80 +21,106 @@ interface Order {
 }
 
 const SparkleEffect = () => {
-  const [sparkles, setSparkles] = useState<any[]>([]);
+  const [sparkles, setSparkles] = useState<Sparkle[]>([]);
 
-  const sparkleColors = ["#FF1493", "#FF6347", "#FFD700"]; // Pink, Red, Gold
-  const sparkleShapes = ["star", "leaf"]; // Star and Leaf shapes
+  interface Sparkle {
+    id: number;
+    x: number;
+    y: number;
+    opacity: number;
+    color: string;
+    shape: "star" | "leaf";
+    duration: number;
+  }
+  
+  const sparkleColors = ["#FF1493", "#FF6347", "#FFD700"];
+const sparkleShapes: ("star" | "leaf")[] = ["star", "leaf"];
 
-  useEffect(() => {
-    const createSparkle = () => {
-      const xPosition = Math.random() * window.innerWidth;
-      const sparkle = {
-        id: Math.random(),
-        x: xPosition,
-        y: -50,
-        opacity: Math.random(),
-        color: sparkleColors[Math.floor(Math.random() * sparkleColors.length)], // Randomly choose a color
-        shape: sparkleShapes[Math.floor(Math.random() * sparkleShapes.length)], // Randomly choose a shape
-        duration: Math.random() * 2 + 2, // Random fall time between 2 and 4 seconds
-      };
-      setSparkles((prev) => [...prev, sparkle]);
-      setTimeout(() => {
-        setSparkles((prev) => prev.filter((s) => s.id !== sparkle.id));
-      }, 10000);
+
+useEffect(() => {
+  const createSparkle = () => {
+    const xPosition = Math.random() * window.innerWidth;
+    const sparkle: Sparkle = {
+      id: Math.random(),
+      x: xPosition,
+      y: -50,
+      opacity: Math.random(),
+      color: sparkleColors[Math.floor(Math.random() * sparkleColors.length)],
+      shape: sparkleShapes[Math.floor(Math.random() * sparkleShapes.length)],
+      duration: Math.random() * 2 + 2,
     };
+    setSparkles((prev) => [...prev, sparkle]);
+    setTimeout(() => {
+      setSparkles((prev) => prev.filter((s) => s.id !== sparkle.id));
+    }, 10000);
+  };
 
-    // Generate sparkles every 100ms
-    const interval = setInterval(createSparkle, 100);
-
-    // Cleanup the interval when the component is unmounted
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div style={styles.container}>
-      {sparkles.map((sparkle) => (
-        <div
-          key={sparkle.id}
-          style={{
-            ...styles.sparkle,
-            left: sparkle.x + "px",
-            top: sparkle.y + "px",
-            animation: fall ${sparkle.duration}s linear infinite, // Fixed animation syntax
-            opacity: sparkle.opacity,
-            backgroundColor: sparkle.color, // Apply the random color here
-            clipPath:
-              sparkle.shape === "star"
-                ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)"
-                : "polygon(50% 0%, 61% 20%, 80% 40%, 70% 70%, 50% 50%, 30% 70%, 20% 40%, 39% 20%)", // Star or Leaf shape
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-const styles = {
+  const interval = setInterval(createSparkle, 100);
+  return () => clearInterval(interval);
+}, []);
+const styles: { container: React.CSSProperties; sparkle: React.CSSProperties } = {
   container: {
-    position: "absolute",
+    position: "fixed",
     top: 0,
     left: 0,
-    right: 0,
-    bottom: 0,
-    pointerEvents: "none", // Ensure sparkles don't block clicks
+    width: "100%",
+    height: "100%",
+    pointerEvents: "none", // ✅ TS-safe
     overflow: "hidden",
     zIndex: 9999,
-    width: "100vw",
-    height: "100vh",
   },
   sparkle: {
     position: "absolute",
-    width: "15px", // Increased size for star and leaf
-    height: "15px", // Increased size for star and leaf
+    width: "10px",
+    height: "10px",
+    borderRadius: "50%",
   },
 };
 
-// Define the table data using the interface
+
+  return (
+    <>
+      <div style={styles.container}>
+        {sparkles.map((sparkle) => (
+          <div
+            key={sparkle.id}
+            style={{
+              ...styles.sparkle,
+              left: `${sparkle.x}px`,
+              top: `${sparkle.y}px`,
+              animation: `fall ${sparkle.duration}s linear`,
+              opacity: sparkle.opacity,
+              backgroundColor: sparkle.color,
+              clipPath:
+                sparkle.shape === "star"
+                  ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)"
+                  : "polygon(50% 0%, 61% 20%, 80% 40%, 70% 70%, 50% 50%, 30% 70%, 20% 40%, 39% 20%)",
+            }}
+          />
+        ))}
+      </div>
+    </>
+  );
+};
+
+// const styles = {
+//   container: {
+//     position: "fixed" as const,
+//     top: 0,
+//     left: 0,
+//     width: "100vw",
+//     height: "100vh",
+//     pointerEvents: "none",
+//     overflow: "hidden",
+//     zIndex: 9999,
+//   },
+//   sparkle: {
+//     position: "absolute" as const,
+//     width: "15px",
+//     height: "15px",
+//   },
+// };
+
 const tableData: Order[] = [
   {
     id: 1,
@@ -282,115 +308,79 @@ export default function BasicTableOne() {
   const [showCongrats, setShowCongrats] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setShowCongrats(true); // Show the congratulations message after a brief delay
-    }, 500);
-
-    setTimeout(() => {
-      setShowCongrats(false); // Hide the congratulations message after 10 seconds
-    }, 5000);
+    const showTimeout = setTimeout(() => setShowCongrats(true), 500);
+    const hideTimeout = setTimeout(() => setShowCongrats(false), 5000);
+    return () => {
+      clearTimeout(showTimeout);
+      clearTimeout(hideTimeout);
+    };
   }, []);
 
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
-      {/* Congratulations Message */}
+      {/* Congrats Message */}
       {showCongrats && (
-        <div className="fixed top-1/4 left-1/2 transform -translate-x-1/2 p-6 bg-gradient-to-r from-pink-100 to-red-100 text-gray-800 text-2xl font-semibold rounded-lg shadow-lg animate-fadeIn sparkle text-center" style={{ fontFamily: 'Poppins, sans-serif' }}>
-          <span role="img" aria-label="love" className="text-4xl">❤</span>
+        <div className="fixed top-1/4 left-1/2 transform -translate-x-1/2 p-6 bg-gradient-to-r from-pink-100 to-red-100 text-gray-800 text-2xl font-semibold rounded-lg shadow-lg animate-pulse text-center" style={{ fontFamily: 'Poppins, sans-serif', zIndex: 10000 }}>
+          <span role="img" aria-label="love" className="text-4xl">❤️</span>
           Hey, miss cute gorgeous girl in the world 💖✨.. Here is the list of permissions given to the super admin 👑🔐
-          <span role="img" aria-label="love" className="text-4xl">❤</span>
           <span role="img" aria-label="sparkle" className="text-4xl">✨</span>
         </div>
       )}
 
-      {/* Sparkle Effect */}
+      {/* Sparkles */}
       <SparkleEffect />
 
-      {/* Table Content */}
+      {/* Table */}
       <div className="max-w-full overflow-x-auto">
         <div className="min-w-[1102px]">
           <Table>
             <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
               <TableRow>
-                {/* Table Header Cells */}
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  ID
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Permission Name
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Percentage
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Cute Line
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Comments
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Permissions Type
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Status
-                </TableCell>
+                {[
+                  "ID",
+                  "Permission Name",
+                  "Percentage",
+                  "Cute Line",
+                  "Comments",
+                  "Permissions Type",
+                  "Status",
+                ].map((header) => (
+                  <TableCell
+                    key={header}
+                    isHeader
+                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  >
+                    {header}
+                  </TableCell>
+                ))}
               </TableRow>
             </TableHeader>
-
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
               {tableData.map((order) => (
                 <TableRow key={order.id}>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.id}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.projectName}
-                  </TableCell>
+                  <TableCell className="px-4 py-3">{order.id}</TableCell>
+                  <TableCell className="px-4 py-3">{order.projectName}</TableCell>
                   <TableCell className="px-4 py-3">
-                    {/* Directly define percentage color */}
                     <span
                       className={`inline-block px-2 py-1 rounded-full ${
-                        parseInt(order.percentage.replace("%", "")) >= 70
-                          ? "bg-green-500 text-white"
-                          : parseInt(order.percentage.replace("%", "")) >= 40
-                          ? "bg-yellow-500 text-white"
-                          : "bg-red-500 text-white"
-                      }`}
+                        parseInt(order.percentage) >= 70
+                          ? "bg-green-500"
+                          : parseInt(order.percentage) >= 40
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
+                      } text-white`}
                     >
                       {order.percentage}
                     </span>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3 text-pink-600 font-medium italic">
                     {order.cuteLine}
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3 text-gray-600 font-light">
                     {order.description}
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                    {order.permissions.join(", ")}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3">{order.permissions.join(", ")}</TableCell>
+                  <TableCell className="px-4 py-3">
                     <Badge
                       size="sm"
                       color={

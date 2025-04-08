@@ -17,7 +17,7 @@ export default function SignInForm() {
   const validEmail = "cutepanda@admin.com";
   const validPassword = "Panda@superadmim";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission
 
     // Check if the provided credentials match the static ones
