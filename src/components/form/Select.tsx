@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface Option {
   value: string;
@@ -7,41 +7,39 @@ interface Option {
 
 interface SelectProps {
   options: Option[];
-  value?: string; // Optional for uncontrolled mode
   placeholder?: string;
   onChange: (value: string) => void;
   className?: string;
   defaultValue?: string;
-  required?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
   options,
-  value,
   placeholder = "Select an option",
   onChange,
   className = "",
   defaultValue = "",
-  required = false,
 }) => {
-  const isControlled = value !== undefined;
+  // Manage the selected value
+  const [selectedValue, setSelectedValue] = useState<string>(defaultValue);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value);
+    const value = e.target.value;
+    setSelectedValue(value);
+    onChange(value); // Trigger parent handler
   };
 
   return (
     <select
-      className={`h-11 w-full appearance-none rounded-lg border border-gray-300 px-4 py-2.5 pr-11 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 ${
-        (isControlled ? value : defaultValue)
+      className={`h-11 w-full appearance-none rounded-lg border border-gray-300  px-4 py-2.5 pr-11 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 ${
+        selectedValue
           ? "text-gray-800 dark:text-white/90"
           : "text-gray-400 dark:text-gray-400"
       } ${className}`}
+      value={selectedValue}
       onChange={handleChange}
-      value={isControlled ? value : undefined}
-      defaultValue={!isControlled ? defaultValue : undefined}
-      required={required}
     >
+      {/* Placeholder option */}
       <option
         value=""
         disabled
@@ -49,6 +47,7 @@ const Select: React.FC<SelectProps> = ({
       >
         {placeholder}
       </option>
+      {/* Map over options */}
       {options.map((option) => (
         <option
           key={option.value}

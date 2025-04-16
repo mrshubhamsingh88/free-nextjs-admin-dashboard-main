@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <div>
-      <PageBreadcrumb pageTitle="Calendar" />
+      <PageBreadcrumb pageTitle="🎋🐼 Panda-fy Your Schedule! – Because even admins deserve a cute & cozy calendar! 💖🤍" />
       <Calendar />
     </div>
   );

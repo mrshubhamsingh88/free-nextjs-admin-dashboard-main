@@ -148,7 +148,7 @@ export default function RecentFights() {
                 isHeader
                 className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
-                Reson
+                Reason
               </TableCell>
               <TableCell
                 isHeader

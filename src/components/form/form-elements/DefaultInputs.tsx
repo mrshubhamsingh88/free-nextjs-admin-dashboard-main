@@ -4,6 +4,7 @@ import ComponentCard from "../../common/ComponentCard";
 import Label from "../Label";
 import Input from "../input/InputField";
 import Select from "../Select";
+import { ChevronDownIcon } from "../../../icons";
 
 // Define the options for each question
 const options = [
@@ -36,6 +37,7 @@ const options9 = options1;
 const options10 = options;
 const options11 = options1;
 const options12 = options;
+const options13 = options1;
 const options14 = options1;
 
 export default function DefaultInputs() {
@@ -62,8 +64,6 @@ export default function DefaultInputs() {
     secret: "",
     describe: "",
     youwant: "",
-    superadminhabit :""
-    
   });
 
   const [successMessage, setSuccessMessage] = useState("");
@@ -83,12 +83,11 @@ export default function DefaultInputs() {
   const saveToJson = () => {
     // Check if all fields are filled
     for (const key in formData) {
-      if (formData[key as keyof typeof formData] === "") {
+      if (formData[key] === "") {
         alert("Please fill all fields!");
         return;
       }
     }
-    
 
     const json = JSON.stringify(formData, null, 2);
 
@@ -146,7 +145,7 @@ export default function DefaultInputs() {
 
         {/* Question 4 */}
         <div>
-          <Label>You really feel I&apos;m your bachha.. 🧸</Label>
+          <Label>You really feel I'm your bachha.. 🧸</Label>
           <Select
             options={options3}
             value={formData.question4}
@@ -218,7 +217,7 @@ export default function DefaultInputs() {
 
         {/* Question 10 */}
         <div>
-          <Label>Your real feel that&apos;s you&apos;re my favorite person 😍</Label>
+          <Label>Your real feel that's you're my favorite person 😍</Label>
           <Select
             options={options9}
             value={formData.question10}
@@ -326,7 +325,7 @@ export default function DefaultInputs() {
 
         {/* Missing field */}
         <div>
-          <Label>I&apos;m your favourite person🙋Member</Label>
+          <Label>I'm your favourite person🙋Member</Label>
           <Input
             type="text"
             name="favourite"
@@ -338,7 +337,7 @@ export default function DefaultInputs() {
         </div>
 
         <div>
-          <Label>One secret line you want to tell me💗🎀🌸</Label>
+          <Label>One secret line you want to tell me💗🎀🌸</Label>
           <Input
             type="text"
             name="secret"
@@ -350,7 +349,7 @@ export default function DefaultInputs() {
         </div>
 
         <div>
-          <Label>Describe our bond in one line🧸ྀི</Label>
+          <Label>Describe our bond in one line🧸ྀི</Label>
           <Input
             type="text"
             name="describe"
